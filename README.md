@@ -6,7 +6,8 @@
 - NPM
 - Postman or any other API test program [Postman](https://www.postman.com/downloads/)
 
-## Running the project
+## Running the project
+
 1. Download the repo 
 2. Create in MongoDB Compass a database called **sciopets** or a name of your choice.
 3. Run `npm i`
@@ -27,7 +28,8 @@
 6. Run `npm run start`
 7. Develop!
 
-## Homework
+## Homework
+
 1. Search for the TODO comments in the project
 2. Implement the requested changes
 3. Test and save your changes
