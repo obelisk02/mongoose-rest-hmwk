@@ -13,9 +13,18 @@ const PetModel = new mongoose.Schema({
         type: Number,
         required: true
     },
-    specie: {
+    type: {
         type: String,
-        required: true
+        required: true,
+        enum: ['cat', 'bird', 'dog']
+    },
+    species: {
+        type: String,
+        required: false
+    },
+    gender: {
+        type: String,
+        enum: ['male', 'female']
     },
     status: {
         type: String,
@@ -23,7 +32,9 @@ const PetModel = new mongoose.Schema({
         enum: ['deceased', 'alive']
     },
     owner: {
-        ref: ''
+        type: mongoose.Schema.Types.ObjectId,
+        required: false, // It can be registered without Owner
+        ref: "Owner"
     }
 });
 

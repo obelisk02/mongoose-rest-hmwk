@@ -15,18 +15,22 @@ exports.signUp = async function(req, res) {
         return res.status(400).json({ error: 'Please send password '});
     }
 
-
     /** 
+     * 
+     * FORMA PROMISE
     User.create(req.body).then(
-        function (err, value) {
-            if (err) throw err;
-
+        function (value) {
             return res.json({user});
+        }
+    ).catch(
+        function(err) {
+            return res.status(400).send(error);
         }
     )
     **/
 
    /** 
+    * FORMA AWAIT
    const newUser = await User.create(req.body);
    if (!newUser) {
        console.log('something occured'):

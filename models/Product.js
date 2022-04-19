@@ -9,10 +9,15 @@ const ProductModel = new mongoose.Schema({
     description: {
         type: String, 
         maxlength: 200,
-        required: true
+        required: false
     },
     image: {
-        type: String
+        type: String,
+        default: "https://canalizados.com/images/productDefault.png"
+    },
+    price: {
+        type: Number,
+        required: true
     },
     brand: {
         type: String,

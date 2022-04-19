@@ -43,6 +43,4 @@ UserModel.virtual('full_name').get(function() {
     return this.first_name+ ' ' + this.last_name;
 });
 
-
-
 mongoose.model('User', UserModel);
