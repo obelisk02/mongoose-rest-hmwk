@@ -13,8 +13,9 @@
 2. Create in MongoDB Compass a database called **sciopets** or a name of your choice.
 3. Run `npm install`
 4. Checkout your branch
+    `git pull`
     `git fetch --all`
-    `git checkout **name** origin/**name**`
+    `git checkout **name**`
      where **name** is replaced by your name:
     - jose
     - julian
