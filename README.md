@@ -38,3 +38,9 @@
 3. Test and save your changes
 4. Push the changes to your branch
 
+## Endpoints
+Example:
+    - http://localhost:3000/api/pets
+    - http://localhost:3000/api/owners
+    - http://localhost:3000/api/products
+
