@@ -17,15 +17,15 @@
     2. `git fetch --all`
     3. `git checkout **name**`
      where **name** is replaced by your name:
-    - jose
-    - julian
-    - mario
-    - cynthia
-    - carlos
-    - david
-    - ivan
-    - oscar
-    - samuel
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
 5. (Optional) create a `.env` file in the root to specify your config values.
 6. (Optional but useful) Run `npm run seed` to fill your database with 10 random Pets with 10 random Owners and 10 random Products
 7. Run `npm run start`
@@ -40,7 +40,7 @@
 
 ## Endpoints
 Example:
-    - http://localhost:3000/api/pets
-    - http://localhost:3000/api/owners
-    - http://localhost:3000/api/products
+    - http://localhost:3000/api/courses
+    - http://localhost:3000/api/teachers
+    - http://localhost:3000/api/students
 

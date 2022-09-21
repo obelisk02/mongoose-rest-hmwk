@@ -29,13 +29,13 @@ exports.signUp = async function(req, res) {
     )
     **/
 
-   /** 
+    /** 
     * FORMA AWAIT
-   const newUser = await User.create(req.body);
-   if (!newUser) {
-       console.log('something occured'):
-   }
-   **/
+    const newUser = await User.create(req.body);
+    if (!newUser) {
+        console.log('something occured'):
+    }
+    **/
     
     newUser.save(function(err, user) {
         if (err) {

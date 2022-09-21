@@ -1,4 +1,4 @@
 require('./User');
-require('./Pet');
-require('./Product');
-require('./Owner');
+require('./Student');
+require('./Teacher');
+require('./Course');

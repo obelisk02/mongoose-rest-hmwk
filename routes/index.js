@@ -1,12 +1,12 @@
 const router = require('express').Router();
 const userRoutes = require('./userRoutes');
-const petRoutes = require('./petRoutes');
-const productRoutes = require('./productRoutes');
-const ownerRoutes = require('./ownerRoutes');
+const studentRoutes = require('./studentRoutes');
+const teacherRoutes = require('./teacherRoutes');
+const courseRoutes = require('./courseRoutes');
 
 router.use('/auth', userRoutes);
-router.use('/pets', petRoutes);
-router.use('/products', productRoutes);
-router.use('/owners', ownerRoutes);
+router.use('/students', studentRoutes);
+router.use('/teachers', teacherRoutes);
+router.use('/courses', courseRoutes);
 
 module.exports = router;
