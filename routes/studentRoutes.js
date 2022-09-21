@@ -1,11 +1,10 @@
 const router = require('express').Router();
-const petController = require('../controllers/petController');
+const studentController = require('../controllers/studentController');
 
-router.get('/', petController.getAll);
-router.get('/searchPets', petController.searchPetsByName);
-router.get('/:id', petController.findOne);
-router.post('/', petController.createPet);
-router.patch('/:id', petController.updatePet);
-router.delete('/:id', petController.deletePet);
+router.get('/', studentController.getAll);
+router.get('/:id', studentController.findOne);
+router.post('/', studentController.createStudent);
+router.patch('/:id', studentController.updateStudent);
+router.delete('/:id', studentController.deleteStudent);
 
 module.exports = router;

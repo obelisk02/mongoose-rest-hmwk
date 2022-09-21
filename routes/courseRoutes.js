@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const coursesController = require('../controllers/coursesController');
+const coursesController = require('../controllers/courseController');
 
 router.get('/', coursesController.getAll);
 router.get('/:id', coursesController.findOne);

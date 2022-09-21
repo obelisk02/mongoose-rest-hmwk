@@ -1,36 +1,22 @@
 const mongoose = require('mongoose');
 const Product = mongoose.model('Product');
 
-exports.getAllProducts = function(req, res) {
-    // TODO: Retornar todos los productos
+exports.getAll = function(req, res) {
 
-    return res.json({ products });
 }
 
-exports.findProduct = function(req, res) {
-    // TODO: Retornar un producto por id
-    const id = req.params.id;
+exports.findOne = function(req, res) {
 
-    return res.json({ product });
 }
 
-exports.createProduct = function(req, res) {
-    // TODO: Crear un producto, en base al body
-    const body = req.body;
+exports.createTeacher = function(req, res) {
 
-    return res.json({ product });
 }
 
-exports.updateProduct = function(req, res) {
-    // TODO: Actualizar un producto, en base al id
-    const id = req.params.id;
+exports.updateTeacher = function(req, res) {
 
-    return res.json({ product });
 }
 
-exports.deleteProduct = function(req, res) {
-    // TODO: Borrar un producto, en base al id
-    const id = req.params.id;
+exports.deleteTeacher = function(req, res) {
 
-    return res.json({ message: 'Product Deleted' });
 }
