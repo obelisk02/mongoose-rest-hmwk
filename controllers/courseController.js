@@ -11,8 +11,15 @@ exports.getAll = async function(req, res) {
         );
 }
 
+exports.getActiveCourses = function(req, res) {
+    // TODO: Devolver todos los cursos con 'active' = true
+}
+
 exports.findOne = async function(req, res) {
-    // TODO: Encontrar curso por id y devolver con alumnos
+    /* 
+        TODO: Encontrar curso por id y devolver con students, 
+        solo seleccionar id y full_name de los students
+    */ 
 }
 
 exports.createCourse = function(req, res) {

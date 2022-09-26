@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Teacher = mongoose.model('Teacher');
+const TeacherModel = mongoose.model('Teacher');
 
 exports.getAll = function(req, res) {
     // TODO: Devolver todos los Teachers
@@ -7,7 +7,7 @@ exports.getAll = function(req, res) {
 }
 
 exports.findOne = function(req, res) {
-    // TODO: Devolver un Teacher con sus grupos
+    // TODO: Devolver un Teacher con sus courses, sólo seleccionaremos el id y title de los cursos 
 
 }
 
@@ -17,7 +17,7 @@ exports.createTeacher = function(req, res) {
 }
 
 exports.updateTeacher = function(req, res) {
-    // TODO: Actualizar Teacher (info o courses)
+    // TODO: Actualizar Teacher (incluyendo courses)
 
 }
 

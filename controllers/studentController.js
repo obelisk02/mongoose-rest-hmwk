@@ -89,3 +89,20 @@ exports.deleteStudent = async function(req, res) {
         return res.status(204);
     })
 }
+
+
+exports.searchByName = function(req, res) {
+    const search = req.query.name;
+
+    const query = {
+        first_name: { $regex: search, $options: 'i' } // Busca por expresión regular,  'i'  es para ignorar mayusculas
+    };
+
+    StudentModel.find(query, function(err, docs) {
+        if (err) {
+            return res.status(400).json({ err });
+        }
+
+        return res.json(docs);
+    });
+}
