@@ -9,104 +9,102 @@ mongoDBConnection.then(() => {
 });
 
 require('../models/index');
-const Pet = mongoose.model('Pet');
-const Owner = mongoose.model('Owner');
-const Product = mongoose.model('Product');
+const Student = mongoose.model('Student');
+const Course = mongoose.model('Course');
+const Teacher = mongoose.model('Teacher');
 
 const genders = ['male', 'female'];
-const type = ['cat','dog','bird'];
-const petStatus = ['alive', 'deceased'];
  
 async function runSeeder() {
     // Clean database
-    await Pet.deleteMany();
-    await Owner.deleteMany();
-    await Product.deleteMany();
+    await Student.deleteMany();
+    await Course.deleteMany();
+    await Teacher.deleteMany();
 
 
-    console.log('CREATING 10 OWNERS....\n');
+    console.log('CREATING 10 Courses....\n');
     // 10 Owners
     for (let i = 0; i < 10; i++) {
-        const newUserData = {
-            first_name: faker.name.firstName(),
-            last_name: faker.name.lastName(),
-            phone: faker.phone.phoneNumberFormat()
-        }
+        const newCourseData = {
+            title: faker.random.words(2)
+        };
 
         try {
-            const fakeOwner = await Owner.create(newUserData);
-            console.log(fakeOwner);
+            const fakeCourse = await Course.create(newCourseData);
+            console.log(fakeCourse);
         } catch (error) {
             console.log('something ocurred');
         }
     }
 
     // Get all Owners to use their id;
-    const allOwners = await Owner.find();
+    const allCourses = await Course.find();
 
-    console.log('CREATING 10 PETS WITH OWNER....\n');
-    // 10 pets, with its owner
+    console.log('CREATING 10 STUDENTS WITH COURSES....\n');
+    // 10 students with 2 courses
     for (let i = 0; i < 10; i++) {
         const randomGender = genders[Math.floor(Math.random() * genders.length)];
-        const randomType = type[Math.floor(Math.random() * type.length)];
-        const randomStatus = petStatus[Math.floor(Math.random() * petStatus.length)];
-        const randomOwnerIndex = faker.datatype.number({ min: 0, max: 9 });
-        let species;
+        const randomCourseIndex = faker.datatype.number({ min: 0, max: 9 });
+        let randomCourseIndex2 = faker.datatype.number({ min: 0, max: 9 });
+
+        /** Do random again if repeated course */
+        while (randomCourseIndex2 == randomCourseIndex) {
+            randomCourseIndex2 = faker.datatype.number({ min: 0, max: 9 });
+        } 
     
-        switch(randomType) {
-            case 'cat':
-                species = faker.animal.cat();
-                break;
-            case 'dog':
-                species = faker.animal.dog();
-                break;
-            case 'bird':
-                species = faker.animal.bird();
-                break;
-        }
-    
-        const newPetData = {
-            name: faker.name.firstName(randomGender),
-            birth_date: faker.date.between('01/01/2010', new Date()).toLocaleDateString('mx'),
-            weight: faker.datatype.number({ min: 1, max: 50, precision: 0.01 }),
-            type: randomType,
-            species,
-            status: randomStatus,
-            gender: randomGender,
-            owner: allOwners[randomOwnerIndex]._id // Owner Id
+        const newStudentData = {
+            first_name: faker.name.firstName(randomGender),
+            last_name: faker.name.lastName(),
+            birth_date: faker.date.between('01/01/1990', '01/01/2004').toLocaleDateString('mx'),
+            courses: [
+                allCourses[randomCourseIndex]._id, // Course 1 Id
+                allCourses[randomCourseIndex2]._id // Course 2 Id
+            ]
         };
 
-        try {
-            // Create new pet
-            const newPet = await Pet.create(newPetData);
+        newStudentData.email = faker.internet.email(newStudentData.first_name, newStudentData.last_name);
 
-            console.log(newPet);
-            // Add pet id to owner's pets array
-            allOwners[randomOwnerIndex].pets.push(newPet);
-            await allOwners[randomOwnerIndex].save();
+        try {
+            // Create new student
+            const newStudent = await Student.create(newStudentData);
+
+            console.log(newStudent);
+            // Add student id to course's students array
+            allCourses[randomCourseIndex].students.push(newStudent);
+            allCourses[randomCourseIndex2].students.push(newStudent);
+            await allCourses[randomCourseIndex].save();
+            await allCourses[randomCourseIndex2].save();
         } catch (error) {
-            console.log('something ocurred');
+            console.log(error);
         }
     }
 
 
-    console.log('CREATING 10 PRODUCTS....');
-    // 10 products
+    console.log('CREATING 10 TEACHERS....');
+    // 10 teachers with 1 course
     for (let i = 0; i < 10; i++) {
-        let newProductData = {
-            name: faker.commerce.product(),
-            price: faker.commerce.price(10, 20000),
-            brand: faker.random.word()
-        }
+        const randomGender = genders[Math.floor(Math.random() * genders.length)];
+        const randomCourseIndex = faker.datatype.number({ min: 0, max: 9 });
 
-        if (i%2 === 0) {
-            newProductData.description =  faker.commerce.productDescription();
-        }
-        
+        let newTeacherData = {
+            first_name: faker.name.firstName(randomGender),
+            last_name: faker.name.lastName(),
+            birth_date: faker.date.between('01/01/1955', '01/01/1996').toLocaleDateString('mx'),
+            courses: [
+                allCourses[randomCourseIndex]._id
+            ]
+        };
+
+        newTeacherData.email = faker.internet.email(newTeacherData.first_name, newTeacherData.last_name);
+
         try {
-            const newProduct = await Product.create(newProductData);
+            const newTeacher = await Teacher.create(newTeacherData);
 
-            console.log(newProduct);
+            console.log(newTeacher);
+
+            // Add teacher id to course
+            allCourses[randomCourseIndex].teacher = newTeacher;
+            await allCourses[randomCourseIndex].save();
         } catch (error) {
             console.log('something ocurred');
         }
