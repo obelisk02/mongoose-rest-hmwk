@@ -12,7 +12,13 @@ exports.getAll = async function(req, res) {
 }
 
 exports.getActiveCourses = function(req, res) {
-    // TODO: Devolver todos los cursos con 'active' = true
+    CourseModel.find({active: true})
+        .then(
+            docs => res.json(docs)
+        )
+        .catch(
+            err => res.json({ err })
+        );
 }
 
 exports.findOne = async function(req, res) {
@@ -35,11 +41,35 @@ exports.createCourse = function(req, res) {
 }
 
 exports.updateCourse = function(req, res) {
-    // TODO: Actualizar curso, incluye actualizar 'active' a false
+    const id = req.params.id;
+
+    CourseModel.findByIdAndUpdate(id, req.body , null , function(err,course) {
+        if (err) {
+            return res.status(400).json({ err });
+        }
+        if(course === null) {
+            return res.status(404).json({ err: "Course not found " });
+        }
+        return res.json(course);
+    })
 }
 
 exports.deleteCourse = function(req, res) {
-    // TODO: Borrar curso, si tiene 'active' true, devolver mensaje de error
+    const id = req.params.id;
+
+    CourseModel.findByIdAndRemove(id, function(err, doc) {
+        if (err) {
+            return res.status(400).json({ err });
+        }
+        if(doc===null){
+            return res.status(404).json("Course doesn't exist");
+        }
+        if(doc.active===true){
+            //sigue borrando
+            return res.status(400).json("Active courses cannot be deleted");
+        }
+        return res.status(200).json("Course deleted successfully");
+    })
 }
 
 /**

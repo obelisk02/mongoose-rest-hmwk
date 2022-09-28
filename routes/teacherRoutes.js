@@ -6,6 +6,6 @@ router.get('/:id', teacherController.findOne);
 router.post('/', teacherController.createTeacher);
 router.post('/:id/assignCourse', teacherController.assignCourses);
 router.patch('/:id', teacherController.updateTeacher);
-router.delete('/', teacherController.deleteTeacher);
+router.delete('/:id', teacherController.deleteTeacher);
 
 module.exports = router;
