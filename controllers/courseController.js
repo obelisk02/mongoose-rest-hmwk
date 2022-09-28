@@ -13,6 +13,7 @@ exports.getAll = async function(req, res) {
 
 exports.getActiveCourses = function(req, res) {
     // TODO: Devolver todos los cursos con 'active' = true
+    /* crteo que ya jala */
 }
 
 exports.findOne = async function(req, res) {
