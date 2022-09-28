@@ -21,11 +21,18 @@ exports.getActiveCourses = function(req, res) {
         );
 }
 
-exports.findOne = async function(req, res) {
-    /* 
-        TODO: Encontrar curso por id y devolver con students, 
-        solo seleccionar id y full_name de los students
-    */ 
+exports.findOne = function(req, res) {
+    const id = req.params.id;
+    CourseModel.findById(id, function(err, course) {
+        if (err) {
+            return res.status(400).json({ err });
+        }
+    
+        if (!course) {
+            return res.status(404).json({ err: "Course not found" });
+        }
+        return res.json(course);
+    }).populate("students", "_id first_name last_name");
 }
 
 exports.createCourse = function(req, res) {
@@ -57,7 +64,7 @@ exports.updateCourse = function(req, res) {
 exports.deleteCourse = function(req, res) {
     const id = req.params.id;
 
-    CourseModel.findByIdAndRemove(id, function(err, doc) {
+    CourseModel.findById(id, function(err, doc) {
         if (err) {
             return res.status(400).json({ err });
         }
@@ -65,9 +72,9 @@ exports.deleteCourse = function(req, res) {
             return res.status(404).json("Course doesn't exist");
         }
         if(doc.active===true){
-            //sigue borrando
             return res.status(400).json("Active courses cannot be deleted");
         }
+        doc.remove();
         return res.status(200).json("Course deleted successfully");
     })
 }
