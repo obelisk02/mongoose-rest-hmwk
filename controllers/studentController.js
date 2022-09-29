@@ -86,7 +86,7 @@ exports.deleteStudent = async function(req, res) {
             return res.status(400).json({ err });
         }
 
-        return res.status(204);
+        return res.status(204).send();
     })
 }
 
